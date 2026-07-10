@@ -86,10 +86,10 @@ $ engram sync
 engram: +2 applied, -0 rolled back, 0 updated (4 active)
 
 $ engram search "embedding"
-#20260710173056  notes_embedding uses an OpenAI-compatible embedder, not llamero  [search, embedding, architecture]
-    **Decision:** The `notes_embedding` BLOB column is populated by calling an OpenAI-compatible `/v1/embeddings` endpoint ...
-#20260710173057  Search plan: FTS5-only gives way to a hybrid FTS5 + embedding ranking  [search, embedding, architecture]
-    **Decision:** On this branch the search design moves from FTS5-only to a hybrid ranking ...
+#20260710173056  notes_embedding uses an OpenAI-compatible embedder, not llamero  [search, embedding, architecture]  score=-1.5609
+    **Decision:** The `notes_embedding` BLOB column is populated by calling an OpenAI-compatible `/v1/embeddings` endpoint (configurable URL + model + API key env),...
+#20260710173057  Search plan: FTS5-only gives way to a hybrid FTS5 + embedding ranking  [search, embedding, architecture]  score=-1.5157
+    **Decision:** On this branch the search design moves from FTS5-only to a hybrid ranking: FTS5 bm25 stays the lexical backbone, and a `notes_embedding` vector (s...
 
 $ git checkout main
 $ engram sync
@@ -178,6 +178,9 @@ AI Documentation Status:
 
 $ shards-alpha ai-docs merge-mcp
 I: Merged 1 MCP server(s) into .mcp.json
+
+$ shards-alpha ai-docs merge-mcp   # idempotent: .mcp.json already has it
+I: Merged 0 MCP server(s) into .mcp.json
 ```
 
 `.mcp.json` now contains the engram stdio MCP server, so an MCP-aware agent in
