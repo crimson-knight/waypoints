@@ -1,0 +1,23 @@
+name: waypoints
+version: 0.1.0
+
+targets:
+  waypoints:
+    main: src/waypoints.cr
+
+crystal: ">= 1.11.2"
+
+license: MIT
+
+dependencies:
+  llamero:
+    github: crimson-knight/llamero
+    branch: v2-cli-backend
+  engram:
+    path: ../engram # TODO(publish): flip to github after publish
+  db:
+    github: crystal-lang/crystal-db
+    version: ~> 0.13.1
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+    version: ~> 0.21.0

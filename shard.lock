@@ -1,0 +1,26 @@
+version: 2.0
+shards:
+  crinja:
+    git: https://github.com/straight-shoota/crinja.git
+    version: 0.9.0
+    checksum: sha256:a12941e4f285b0b91481bae1a3f1d4ef8cdfbdb380812b6c518122e15e76c64d
+
+  db:
+    git: https://github.com/crystal-lang/crystal-db.git
+    version: 0.13.1
+    checksum: sha256:050158247b0dc5d5c29b3913fbbed4cc0a826fe8bab3a3e57fbe59640b1715dc
+
+  engram:
+    path: ../engram
+    version: 0.1.0
+
+  llamero:
+    git: https://github.com/crimson-knight/llamero.git
+    version: 1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1
+    checksum: sha256:c282297ee8a5b68099ec7d33a80e7da231f3ea6550b410fbad49eb2b986d27c1
+
+  sqlite3:
+    git: https://github.com/crystal-lang/crystal-sqlite3.git
+    version: 0.21.0
+    checksum: sha256:045a16583d05f8c48f2cc4a88cda78bf61ecc8f5159fff7464217854fa393cdf
+
