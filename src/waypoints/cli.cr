@@ -1,4 +1,5 @@
 require "./store"
+require "./description"
 require "./version"
 
 module Waypoints
@@ -33,8 +34,14 @@ module Waypoints
       TEXT
 
     # Runs the command-line arguments and returns a process exit status.
+    #
+    # *describer* is a seam for the describe command: when nil a production
+    # Describer (HTTP fetch + local llamero) is built on demand, so no other
+    # command ever constructs the model. Specs inject a fake describer here to
+    # exercise describe without loading MLX or touching the network.
     def self.run(args : Array(String) = ARGV, output : IO = STDOUT, error : IO = STDERR,
-                 env : Hash(String, String) = ENV.to_h, home : String = Path.home.to_s) : Int32
+                 env : Hash(String, String) = ENV.to_h, home : String = Path.home.to_s,
+                 describer : Describer? = nil) : Int32
       flag_path, command_args = extract_db_path(args)
       command = command_args.shift?
 
@@ -45,6 +52,8 @@ module Waypoints
         run_list(command_args, DBPath.resolve(flag_path, env["WAYPOINTS_DB"]?, home), output)
       when "search"
         run_search(command_args, DBPath.resolve(flag_path, env["WAYPOINTS_DB"]?, home), output)
+      when "describe"
+        run_describe(command_args, DBPath.resolve(flag_path, env["WAYPOINTS_DB"]?, home), output, error, describer)
       when "rm"
         run_rm(command_args, DBPath.resolve(flag_path, env["WAYPOINTS_DB"]?, home), output)
       when "version"
@@ -181,6 +190,34 @@ module Waypoints
       store = Store.new(db_path)
       begin
         render_bookmarks(store.search(query), json, output)
+      ensure
+        store.close
+      end
+      0
+    end
+
+    # Parses and executes the describe command: fetch, model/heuristic, save.
+    private def self.run_describe(args : Array(String), db_path : String, output : IO, error : IO,
+                                  describer : Describer?) : Int32
+      url : String? = nil
+
+      args.each do |argument|
+        raise UsageError.new("unknown describe option: #{argument}") if argument.starts_with?("-")
+        raise UsageError.new("describe accepts exactly one URL") if url
+
+        url = argument
+      end
+
+      raise UsageError.new("describe requires a URL") unless url
+
+      active = describer || Describer.new(HTTPPageFetcher.new, LlameroDescriptionModel.new, error)
+      store = Store.new(db_path)
+      begin
+        bookmark = active.describe_and_save(url, store)
+        output.puts "Added #{bookmark.url}"
+        output.puts "  Title: #{bookmark.title}"
+        output.puts "  Tags: #{bookmark.tags.join(", ")}" unless bookmark.tags.empty?
+        output.puts "  Summary: #{bookmark.notes}" unless bookmark.notes.empty?
       ensure
         store.close
       end
