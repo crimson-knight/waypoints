@@ -70,6 +70,34 @@ describe Waypoints::Store do
     end
   end
 
+  it "migrates in a nullable notes_embedding column and reopens idempotently" do
+    SpecSupport.with_temp_db do |db_path|
+      first = Waypoints::Store.new(db_path)
+      begin
+        first.add("https://crystal-lang.org", "Crystal")
+      ensure
+        first.close
+      end
+
+      # Reopening runs the migration again; it must be a no-op, not an error.
+      reopened = Waypoints::Store.new(db_path)
+      begin
+        db = DB.open("sqlite3://#{db_path}")
+        begin
+          count = db.scalar(
+            "SELECT COUNT(*) FROM pragma_table_info('bookmarks') WHERE name = 'notes_embedding'"
+          ).as(Int64)
+          count.should eq(1)
+        ensure
+          db.close
+        end
+        reopened.list.map(&.url).should eq(["https://crystal-lang.org"])
+      ensure
+        reopened.close
+      end
+    end
+  end
+
   it "reports a typed error when removing an absent URL" do
     SpecSupport.with_temp_db do |db_path|
       store = Waypoints::Store.new(db_path)

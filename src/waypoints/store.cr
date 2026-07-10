@@ -174,6 +174,25 @@ module Waypoints
           INSERT INTO bookmarks_fts(rowid, title, tags, notes) VALUES (new.id, new.title, new.tags, new.notes);
         END;
         SQL
+
+      migrate_add_notes_embedding
+    end
+
+    # Adds the nullable notes_embedding BLOB column when an older database
+    # predates it. Idempotent: existing databases are upgraded in place, new
+    # ones already have the column from a prior run of this migration.
+    private def migrate_add_notes_embedding : Nil
+      return if column_exists?("bookmarks", "notes_embedding")
+
+      @db.exec "ALTER TABLE bookmarks ADD COLUMN notes_embedding BLOB"
+    end
+
+    # True when *table* already has a column named *column*.
+    private def column_exists?(table : String, column : String) : Bool
+      count = @db.scalar(
+        "SELECT COUNT(*) FROM pragma_table_info(?) WHERE name = ?", table, column
+      ).as(Int64)
+      count > 0
     end
   end
 end
