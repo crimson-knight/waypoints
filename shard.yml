@@ -14,7 +14,8 @@ dependencies:
     github: crimson-knight/llamero
     branch: v2-cli-backend
   engram:
-    path: ../engram # TODO(publish): flip to github after publish
+    github: crimson-knight/engram
+    version: ~> 0.1.0
   db:
     github: crystal-lang/crystal-db
     version: ~> 0.13.1
