@@ -38,6 +38,38 @@ describe Waypoints::Store do
     end
   end
 
+  it "ranks full-text matches by bm25 over title, tags, and notes" do
+    SpecSupport.with_temp_db do |db_path|
+      store = Waypoints::Store.new(db_path)
+      begin
+        store.add("https://crystal-lang.org", "Crystal Language", ["language"], "A compiled Ruby-like language")
+        store.add("https://sqlite.org", "SQLite", ["database"], "Embedded SQL database engine")
+        store.add("https://fts.example", "Search Notes", ["search"], "Full-text search with sqlite fts5")
+
+        hits = store.search("sqlite")
+        hits.map(&.url).sort.should eq(["https://fts.example", "https://sqlite.org"])
+
+        store.search("language").map(&.url).should eq(["https://crystal-lang.org"])
+        store.search("no-such-term-here").should be_empty
+      ensure
+        store.close
+      end
+    end
+  end
+
+  it "returns no matches for a query that reduces to no tokens" do
+    SpecSupport.with_temp_db do |db_path|
+      store = Waypoints::Store.new(db_path)
+      begin
+        store.add("https://example.com", "Example")
+        # Punctuation-only queries must not raise an FTS5 syntax error.
+        store.search("---").should be_empty
+      ensure
+        store.close
+      end
+    end
+  end
+
   it "reports a typed error when removing an absent URL" do
     SpecSupport.with_temp_db do |db_path|
       store = Waypoints::Store.new(db_path)

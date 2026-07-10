@@ -84,6 +84,28 @@ module Waypoints
       bookmarks.select { |bookmark| bookmark.tags.includes?(normalized_tag) }
     end
 
+    # Ranks bookmarks by FTS5 bm25 over title, tags, and notes (lower score first).
+    #
+    # Tokens are sanitized to bare `[a-z0-9_]` words before being ANDed into the
+    # MATCH expression, so raw query punctuation can never form FTS5 operators.
+    # A query with no usable tokens returns an empty result rather than raising.
+    def search(query : String, limit : Int32 = 50) : Array(Bookmark)
+      tokens = sanitize_tokens(query)
+      return [] of Bookmark if tokens.empty?
+
+      match = tokens.join(" ")
+      bookmarks = [] of Bookmark
+      @db.query_each(
+        "SELECT b.url, b.title, b.tags, b.notes, b.created_at " \
+        "FROM bookmarks_fts JOIN bookmarks b ON b.id = bookmarks_fts.rowid " \
+        "WHERE bookmarks_fts MATCH ? ORDER BY bm25(bookmarks_fts) ASC LIMIT ?",
+        match, limit
+      ) do |rs|
+        bookmarks << bookmark_from(rs)
+      end
+      bookmarks
+    end
+
     # Removes the bookmark for *url*, raising BookmarkNotFoundError when it does not exist.
     def remove(url : String) : Nil
       result = @db.exec("DELETE FROM bookmarks WHERE url = ?", url)
@@ -108,6 +130,11 @@ module Waypoints
     # Decodes a normalized comma-joined tags column.
     private def split_tags(tags : String) : Array(String)
       tags.empty? ? [] of String : tags.split(',')
+    end
+
+    # Reduces a free-text query to bare lowercase word tokens safe for FTS5 MATCH.
+    private def sanitize_tokens(query : String) : Array(String)
+      query.downcase.scan(/[a-z0-9_]+/).map(&.[0])
     end
 
     # Creates the base table, external-content FTS5 table, and synchronization triggers.
