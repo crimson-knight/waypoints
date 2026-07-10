@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "waypoints-sbom",
-  "documentNamespace": "https://spdx.org/spdxdocs/waypoints-0874fb1e-dcdb-4735-9cd3-f40ea691b28f",
+  "documentNamespace": "https://spdx.org/spdxdocs/waypoints-ab49da72-4c3c-4535-a345-c53d7514d8ae",
   "creationInfo": {
-    "created": "2026-07-10T17:25:15Z",
+    "created": "2026-07-10T23:25:05Z",
     "creators": [
       "Tool: shards-2025.11.25.4"
     ],
@@ -63,14 +63,21 @@
     {
       "SPDXID": "SPDXRef-Package-engram",
       "name": "engram",
-      "versionInfo": "0.1.0",
-      "downloadLocation": "NOASSERTION",
+      "versionInfo": "0.1.1",
+      "downloadLocation": "https://github.com/crimson-knight/engram.git",
       "filesAnalyzed": false,
       "supplier": "NOASSERTION",
       "licenseDeclared": "MIT",
       "licenseConcluded": "MIT",
       "copyrightText": "NOASSERTION",
-      "description": "Branch-scoped memory for coding agents — perfect recall on checkout, clean amnesia on switch\n"
+      "description": "Branch-scoped memory for coding agents — perfect recall on checkout, clean amnesia on switch\n",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:github/crimson-knight/engram@0.1.1"
+        }
+      ]
     },
     {
       "SPDXID": "SPDXRef-Package-llamero",

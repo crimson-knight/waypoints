@@ -11,8 +11,9 @@ rules:
     allowed_hosts:
       - github.com
 
-    # engram is a local path dependency during the demo (flipped to github
-    # after publish; see shard.yml's TODO(publish)), so path deps stay allowed.
+    # No path dependencies in this repo (engram resolves as a normal github
+    # dependency) — left permissive rather than tightened, since flipping this
+    # to true buys no protection an allowed_hosts list doesn't already give.
     deny_path_dependencies: false
 
   security:

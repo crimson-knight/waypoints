@@ -20,7 +20,7 @@ shards:
         upstream_checksum: sha256:f83b331a907f4905797a0d669e9a6514ee1acbde167969a2bc7157591466c40a
         installed_checksum: sha256:f83b331a907f4905797a0d669e9a6514ee1acbde167969a2bc7157591466c40a
   engram:
-    version: 0.1.0
+    version: 0.1.1
     files:
       .claude/skills/engram--using-engram/SKILL.md:
         upstream_checksum: sha256:76ec5c0213e21f411795d0b66d7b07789704ba1ebe8b3ba642b0c0e57c10b3fd

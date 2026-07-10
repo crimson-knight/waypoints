@@ -3,7 +3,7 @@
   "specVersion": "1.6",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-10T17:25:15Z",
+    "timestamp": "2026-07-10T23:25:05Z",
     "tools": {
       "components": [
         {
@@ -72,14 +72,21 @@
     {
       "type": "library",
       "name": "engram",
-      "version": "0.1.0",
-      "bom-ref": "engram",
+      "version": "0.1.1",
+      "bom-ref": "pkg:github/crimson-knight/engram@0.1.1",
+      "purl": "pkg:github/crimson-knight/engram@0.1.1",
       "description": "Branch-scoped memory for coding agents — perfect recall on checkout, clean amnesia on switch\n",
       "licenses": [
         {
           "license": {
             "id": "MIT"
           }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/crimson-knight/engram.git"
         }
       ]
     },
@@ -130,7 +137,7 @@
       "ref": "waypoints",
       "dependsOn": [
         "pkg:github/crystal-lang/crystal-db@0.13.1",
-        "engram",
+        "pkg:github/crimson-knight/engram@0.1.1",
         "pkg:github/crimson-knight/llamero@1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
         "pkg:github/crystal-lang/crystal-sqlite3@0.21.0"
       ]
@@ -144,7 +151,7 @@
       "dependsOn": []
     },
     {
-      "ref": "engram",
+      "ref": "pkg:github/crimson-knight/engram@0.1.1",
       "dependsOn": [
         "pkg:github/crystal-lang/crystal-db@0.13.1",
         "pkg:github/crystal-lang/crystal-sqlite3@0.21.0"
