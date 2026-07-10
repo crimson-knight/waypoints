@@ -20,11 +20,18 @@ this first, then `docs/SPEC.md` for the full contract.
 ## Working here
 
 ```sh
-shards-alpha install                         # install deps (use the fork, not stock shards)
+shards install                               # stock shards is all the build needs
+mkdir -p bin                                  # bin/ is gitignored; crystal build won't create it
+crystal build src/waypoints.cr -o bin/waypoints
 crystal spec                                 # full suite; never loads MLX or the network
 crystal tool format --check src spec examples
-crystal build src/waypoints.cr -o bin/waypoints
 ```
+
+`shards-alpha` (the `crimson-knight/shards` fork) is only needed to regenerate
+`docs/compliance/` (`scripts/compliance.sh`) or redistribute AI docs
+(`shards-alpha ai-docs ...`) — both already committed here, so day-to-day work
+on the app doesn't require it. See the README's Quickstart for the full
+stock-vs-fork framing and `docs/TESTED_ENVIRONMENT.md` for exact versions.
 
 Conventions (AED): every command and public method states its intent, raises a
 specific typed error (`UsageError`, `BookmarkAlreadyExistsError`,
@@ -33,11 +40,17 @@ comment. Keep commits small and per-feature.
 
 ## Before changing load-bearing code, ask engram why
 
-Decisions live as committed memories. Search them before re-opening a settled
-question (e.g. why FTS5 instead of a vector DB, why the llamero mock-bridge
-fallback, why the llamero branch pin):
+Decisions live as committed memories. `engram` isn't on PATH by default —
+build it once from the vendored dependency `shards install` already fetched
+(no separate clone needed), then use it as below. `engram hook install`
+(engram >= 0.1.1) bakes the binary's absolute path into the git hooks, so
+checkout/merge/rebase sync automatically even without `engram` on PATH; you
+still need it on PATH to type these commands yourself:
 
 ```sh
+crystal build lib/engram/src/engram.cr -o bin/engram
+export PATH="$PWD/bin:$PATH"
+
 engram sync
 engram search "sqlite fts5"
 engram search "mock bridge"
