@@ -11,8 +11,9 @@ shards:
     checksum: sha256:050158247b0dc5d5c29b3913fbbed4cc0a826fe8bab3a3e57fbe59640b1715dc
 
   engram:
-    path: ../engram
+    git: https://github.com/crimson-knight/engram.git
     version: 0.1.0
+    checksum: sha256:4c53e96d2567c296acc2bf7d9af2389a24cdae9ae14f9e885fc1a3ddfcccd426
 
   llamero:
     git: https://github.com/crimson-knight/llamero.git
