@@ -1,0 +1,25 @@
+# Dependency policy enforced by shards-alpha on install/update and via
+# `shards-alpha policy check`. See shards-alpha docs/compliance-guide.md.
+#
+# NOTE: this is a DIFFERENT schema from .shards-license-policy.yml (which uses a
+# top-level `policy:` key). This one is versioned with a `rules:` tree.
+version: 1
+
+rules:
+  sources:
+    # Every dependency must originate from a trusted git host.
+    allowed_hosts:
+      - github.com
+
+    # engram is a local path dependency during the demo (flipped to github
+    # after publish; see shard.yml's TODO(publish)), so path deps stay allowed.
+    deny_path_dependencies: false
+
+  security:
+    # Every dependency must declare a license.
+    require_license: true
+
+    # Surface, but do not block on, dependencies with postinstall scripts.
+    audit_postinstall: true
+
+  custom: []

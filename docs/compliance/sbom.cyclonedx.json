@@ -1,0 +1,166 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-10T17:25:15Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "shards",
+          "version": "2025.11.25.4"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "waypoints",
+      "version": "0.1.0",
+      "bom-ref": "waypoints",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "crinja",
+      "version": "0.9.0",
+      "bom-ref": "pkg:github/straight-shoota/crinja@0.9.0",
+      "purl": "pkg:github/straight-shoota/crinja@0.9.0",
+      "description": "Implementation of Jinja2 runtime template language in Crystal\n\nhttps://straight-shoota.github.io/crinja/\n",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/straight-shoota/crinja.git"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "db",
+      "version": "0.13.1",
+      "bom-ref": "pkg:github/crystal-lang/crystal-db@0.13.1",
+      "purl": "pkg:github/crystal-lang/crystal-db@0.13.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/crystal-lang/crystal-db.git"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "engram",
+      "version": "0.1.0",
+      "bom-ref": "engram",
+      "description": "Branch-scoped memory for coding agents — perfect recall on checkout, clean amnesia on switch\n",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "llamero",
+      "version": "1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
+      "bom-ref": "pkg:github/crimson-knight/llamero@1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
+      "purl": "pkg:github/crimson-knight/llamero@1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
+      "description": "A Crystal library for interacting with AI/LLM providers with automatic\nfailover and structured output support. Supports OpenAI, Anthropic,\nGroq, and OpenRouter.\n",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/crimson-knight/llamero.git"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "sqlite3",
+      "version": "0.21.0",
+      "bom-ref": "pkg:github/crystal-lang/crystal-sqlite3@0.21.0",
+      "purl": "pkg:github/crystal-lang/crystal-sqlite3@0.21.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/crystal-lang/crystal-sqlite3.git"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "waypoints",
+      "dependsOn": [
+        "pkg:github/crystal-lang/crystal-db@0.13.1",
+        "engram",
+        "pkg:github/crimson-knight/llamero@1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
+        "pkg:github/crystal-lang/crystal-sqlite3@0.21.0"
+      ]
+    },
+    {
+      "ref": "pkg:github/straight-shoota/crinja@0.9.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:github/crystal-lang/crystal-db@0.13.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "engram",
+      "dependsOn": [
+        "pkg:github/crystal-lang/crystal-db@0.13.1",
+        "pkg:github/crystal-lang/crystal-sqlite3@0.21.0"
+      ]
+    },
+    {
+      "ref": "pkg:github/crimson-knight/llamero@1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1",
+      "dependsOn": [
+        "pkg:github/straight-shoota/crinja@0.9.0"
+      ]
+    },
+    {
+      "ref": "pkg:github/crystal-lang/crystal-sqlite3@0.21.0",
+      "dependsOn": [
+        "pkg:github/crystal-lang/crystal-db@0.13.1"
+      ]
+    }
+  ]
+}

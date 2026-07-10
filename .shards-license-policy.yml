@@ -1,0 +1,26 @@
+# License policy consumed by `shards-alpha licenses --check
+# --policy=.shards-license-policy.yml`. See shards-alpha docs/compliance-guide.md.
+#
+# NOTE: this is a DIFFERENT schema from .shards-policy.yml. Here the rules live
+# under a top-level `policy:` key with an SPDX allow-list.
+policy:
+  # SPDX identifiers permitted for any dependency. Compound expressions like
+  # "Apache-2.0 OR MIT" pass when satisfiable from this set.
+  allowed:
+    - MIT
+    - Apache-2.0
+    - BSD-3-Clause
+
+  # SPDX identifiers explicitly forbidden regardless of the allow-list.
+  denied: []
+
+  # Fail a dependency that declares no license at all.
+  require_license: true
+
+  # Manual license attestations for dependencies whose license the scanner
+  # cannot detect from shard.yml or a LICENSE file. Add entries as:
+  #   overrides:
+  #     some-shard:
+  #       license: MIT
+  #       reason: "Confirmed from upstream repository"
+  overrides: {}

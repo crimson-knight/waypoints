@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "tool": "shards-alpha",
+  "tool_version": "2025.11.25.4",
+  "timestamp": "2026-07-10T17:25:15Z",
+  "summary": {
+    "total_packages": 5,
+    "vulnerable_packages": 0,
+    "total_vulnerabilities": 0,
+    "ignored": 0,
+    "filtered_by_severity": 0
+  },
+  "packages": []
+}
