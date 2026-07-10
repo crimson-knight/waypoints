@@ -1,0 +1,38 @@
+/* waypoints docs theme — a small Crystal-purple accent override.
+ *
+ * shards-alpha's `docs` command generates themed API docs and appends this
+ * file after its own CSS variables (see shards-alpha src/commands/docs.cr).
+ * Overriding the :root custom properties here is enough to re-skin the whole
+ * theme, which is the point: `shards-alpha docs` gives a project a branded
+ * documentation site from one tiny stylesheet.
+ *
+ *   shards-alpha docs
+ *   open docs/index.html
+ */
+:root {
+  /* Deepen the sidebar and lift the accents toward Crystal's violet. */
+  --sidebar-bg: #2a0d4d;
+  --sidebar-link-hover: #b794f6;
+  --sidebar-focus-outline: #d6bcfa;
+
+  /* Links and headings pick up the waypoints purple. */
+  --link-color: #6b46c1;
+  --link-visited: #553c9a;
+  --heading-color: #44337a;
+
+  /* Accent + signature surfaces. */
+  --accent-primary: #6b46c1;
+  --accent-secondary: #805ad5;
+  --accent-highlight: #e9d8fd;
+  --type-name-color: #44337a;
+  --signature-color: #553c9a;
+  --signature-hover-bg: #e9d8fd;
+  --signature-hover-border: #805ad5;
+  --kind-color: #805ad5;
+}
+
+/* A subtle branded rule under the project name in the sidebar header. */
+.project-name {
+  border-bottom: 2px solid var(--accent-secondary);
+  padding-bottom: 0.35em;
+}

@@ -1,0 +1,30 @@
+---
+version: 1.0
+shards:
+  llamero:
+    version: 1.0.0+git.commit.8100b4ca2de4abf75137eac2fa2d5a6fe70867f1
+    files:
+      .claude/skills/llamero--cloud-providers/SKILL.md:
+        upstream_checksum: sha256:fc6a05fe86111451759b0514347c1681b9538cd10909aea4acd15311fb387103
+        installed_checksum: sha256:fc6a05fe86111451759b0514347c1681b9538cd10909aea4acd15311fb387103
+      .claude/skills/llamero--local-inference/SKILL.md:
+        upstream_checksum: sha256:f93eb59352c44516b605729143dcf6b92232e93b42037f7f251c74f16cae423c
+        installed_checksum: sha256:f93eb59352c44516b605729143dcf6b92232e93b42037f7f251c74f16cae423c
+      .claude/skills/llamero--adapter-training/SKILL.md:
+        upstream_checksum: sha256:78b8ab38c5cb3cd2ca63a554a27180d14966def5a893bcb6eaf539f4f0d8d8f4
+        installed_checksum: sha256:78b8ab38c5cb3cd2ca63a554a27180d14966def5a893bcb6eaf539f4f0d8d8f4
+      .claude/skills/llamero--docs/reference/CLAUDE.md:
+        upstream_checksum: sha256:4a23185bd3337af25ca3470c367f82f17a883847c6b299664dc36cf7c3f07ce1
+        installed_checksum: sha256:4a23185bd3337af25ca3470c367f82f17a883847c6b299664dc36cf7c3f07ce1
+      .claude/skills/llamero--docs/reference/AGENTS.md:
+        upstream_checksum: sha256:f83b331a907f4905797a0d669e9a6514ee1acbde167969a2bc7157591466c40a
+        installed_checksum: sha256:f83b331a907f4905797a0d669e9a6514ee1acbde167969a2bc7157591466c40a
+  engram:
+    version: 0.1.0
+    files:
+      .claude/skills/engram--using-engram/SKILL.md:
+        upstream_checksum: sha256:76ec5c0213e21f411795d0b66d7b07789704ba1ebe8b3ba642b0c0e57c10b3fd
+        installed_checksum: sha256:76ec5c0213e21f411795d0b66d7b07789704ba1ebe8b3ba642b0c0e57c10b3fd
+      .claude/skills/engram--docs/reference/CLAUDE.md:
+        upstream_checksum: sha256:8942e1c735e601d490d0f0d688bb112dee46470660205e8451329d51d7e236cd
+        installed_checksum: sha256:8942e1c735e601d490d0f0d688bb112dee46470660205e8451329d51d7e236cd
