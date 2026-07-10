@@ -1,0 +1,10 @@
+# engram embedder config (optional — omit this file, or this section, to
+# stay FTS5-only with zero setup). Uncomment and point at any
+# OpenAI-compatible /v1/embeddings endpoint (Ollama works, so does
+# OpenAI) to enable semantic search, blended in via Reciprocal Rank
+# Fusion alongside the default bm25+recency ranking.
+#
+# embedder:
+#   url: http://localhost:11434/v1/embeddings
+#   model: nomic-embed-text
+#   api_key_env: OPENAI_API_KEY

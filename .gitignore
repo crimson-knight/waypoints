@@ -6,3 +6,8 @@
 .crystal/
 *.dwarf
 .driver_prompts/
+
+# >>> engram >>>
+# engram's per-clone cache lives at .git/engram.db, inside .git/ which
+# git never tracks — nothing else needs to be ignored for engram.
+# <<< engram <<<
